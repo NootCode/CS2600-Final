@@ -5,6 +5,7 @@
 #include <string.h>
 
 char *lsh_read_line(void){
+    #ifdef LSH_USE_STD_GETLINE
     char *line = NULL;
     ssize_t bufsize = 0;
 
@@ -20,7 +21,6 @@ char *lsh_read_line(void){
 
 #else
 #define LSH_RL_BUFSIZE 1024
-
     int bufsize = LSH_RL_BUFSIZE;
     int position = 0;
     char *buffer = malloc(sizeof(char)*bufsize);
