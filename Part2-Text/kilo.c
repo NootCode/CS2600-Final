@@ -22,11 +22,11 @@ enum editorKey{
     DEL_KEY,
     PAGE_UP,
     PAGE_DOWN
-}
+};
 
 //NEEDS TO BE REMOVED
-#define STDIN_FILENO
-#define STDOUT_FILENO
+// #define STDIN_FILENO
+// #define STDOUT_FILENO
 //
 
 /** data **/
