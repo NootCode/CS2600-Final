@@ -59,7 +59,7 @@ void enableRawMode(){
     atexit(disableRawMode);
     struct termios raw = E.orig_termios;
     raw.c_iflag &= ~(BRKINT| ICRNL| INPCK| ISTRIP | IXON);
-    raw.c_oflag &- ~(OPOST);
+    raw.c_oflag &= ~(OPOST);
     raw.c_cflag |= (CS8);
     raw.c_lflag &= ~(ECHO | ICANON | IEXTEN | ISIG);
 
@@ -231,7 +231,7 @@ void editorProcessKeypress(){
 
 
 /** output **/
-void editorDrawRows(){
+void editorDrawRows(struct abuf *ab){
     int y;
     for(y = 0; y < E.screenrows; y++){
         if(y == E.screenrows/3){
