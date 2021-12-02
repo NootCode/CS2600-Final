@@ -69,7 +69,7 @@ struct editorConfig E;
 /** prototypes **/
 void editorSetStatusMessage(const char *fmt, ...);
 void editorRefreshScreen();
-void *editorPrompt(char *prompt);
+char *editorPrompt(char *prompt);
 
 /** terminal **/
 void die(const char *s){
@@ -263,6 +263,7 @@ void editorRowInsertChar(erow *row, int at, int c){
 
 void editorRowAppendString(erow *row, char *s, size_t len){
     row->chars = realloc(row->chars, row->size + len + 1);
+    memcpy(&row->chars[row->size], s, len);
     row->size += len;
     row->chars[row->size] = '\0';
     editorUpdateRow(row);
@@ -438,7 +439,7 @@ char *editorPrompt(char *prompt){
                 buf = realloc(buf, bufsize);
             }
             buf[buflen++] = c;
-            buf[buflen] = '\0'
+            buf[buflen] = '\0';
         }
     }
 }
@@ -482,7 +483,7 @@ void editorMoveCursor(int key){
 }
 
 void editorProcessKeypress(){
-    static int quit_times = KILO_QUIT_TIMES
+    static int quit_times = KILO_QUIT_TIMES;
 
     int c = editorReadKey();
 
@@ -607,8 +608,9 @@ void editorDrawStatusBar(struct abuf *ab){
     abAppend(ab, "\x1b[7m", 4);
     char status[80], rstatus[80];
 
-    int len = snprintf(status, sizeof(status), "%.20s - %d lines",
-        E.filename ? E.filename :"[No Name]", E.numrows, E.dirty ? "(modified)" :  "");
+    int len = snprintf(status, sizeof(status), "%.20s - %d lines %s",
+        E.filename ? E.filename : "[No Name]", E.numrows,
+        E.dirty ? "(modified)" : "");
 
     int rlen = snprintf(rstatus, sizeof(rstatus), "%d%d", E.cy + 1, E.numrows);
     if(len > E.screencols)len = E.screencols;
