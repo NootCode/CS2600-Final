@@ -235,7 +235,7 @@ void editorOpen(char * filename) {
     if(!fp) die("fopen");
 
     char *line = NULL;
-    ssize_t linecap = 0;
+    size_t linecap = 0;
     ssize_t linelen;
     
     while ((linelen = getline(&line, &linecap, fp)) != -1) {
