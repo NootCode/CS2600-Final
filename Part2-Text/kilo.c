@@ -69,7 +69,7 @@ struct editorConfig E;
 /** prototypes **/
 void editorSetStatusMessage(const char *fmt, ...);
 void editorRefreshScreen();
-void *editorPromp(char *prompt)
+void *editorPrompt(char *prompt);
 
 /** terminal **/
 void die(const char *s){
