@@ -188,7 +188,7 @@ int editorRowCxToRx(erow *row, int cx){
 }
 
 void editorUpdateRow(erow *row){
-    int tabs = 0
+    int tabs = 0;
     int j;
     for(j = 0; j < row-> size;j++){
         if(row->chars[j] == '\t') tabs++;
@@ -238,8 +238,8 @@ void editorOpen(char * filename) {
     ssize_t linecap = 0;
     ssize_t linelen;
     
-    while((linelen = getline(&line, &linecap , fp)) != -1){
-        while(linelen > 0 && (line[linelen - 1] == \'\n' || line[linelen - 1] == '\r')) 
+    while ((linelen = getline(&line, &linecap, fp)) != -1) {
+        while(linelen > 0 && (line[linelen - 1] =='\n' || line[linelen - 1] == '\r')) 
             linelen--;
        editorAppendRow(line, linelen);
     }
@@ -373,7 +373,7 @@ void editorDrawRows(struct abuf *ab){
     for(y = 0; y < E.screenrows; y++){
         int filerow = y + E.rowoff;
         if(filerow >= E.numrows){
-            if(E.numrows == 0 && == E.screenrows/3){
+            if(E.numrows == 0 && y == E.screenrows/3){
                 char welcome[80];
                 int welcomelen = snprintf(welcome, sizeof(welcome),"Kilo Editor -- version %s", KILO_VERSION);
                 if(welcomelen > E.screencols) welcomelen = E.screencols;
