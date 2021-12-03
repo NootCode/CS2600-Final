@@ -635,6 +635,7 @@ void editorScroll() {
   }
 }
 
+
 void editorDrawRows(struct abuf *ab){
     int y;
     for(y = 0; y < E.screenrows; y++){
@@ -655,10 +656,10 @@ void editorDrawRows(struct abuf *ab){
                 abAppend(ab, "~", 1);
             }
         }else{
-            int len = E.row[filerow].size;
+            int len = E.row[filerow].rsize - E.coloff;
             if(len < 0) len = 0;
             if(len > E.screencols) len = E.screencols;
-            abAppend(ab, &E.row[filerow].chars, len);
+            abAppend(ab, &E.row[filerow].render[E.coloff], len);
         }
         abAppend(ab, "\x1b[K", 3);
         abAppend(ab, "\r\n", 2);
