@@ -234,8 +234,8 @@ int is_separator(int c){
 }
 
 void editorUpdateSyntax(erow *row){
-    row->hl = realloc(row->hl , row->size);
-    memset(row->hl, HL_NORMAL, row->size);
+    row->hl = realloc(row->hl , row->rsize);
+    memset(row->hl, HL_NORMAL, row->rsize);
 
     if(E.syntax == NULL) return;
 
