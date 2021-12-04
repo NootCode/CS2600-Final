@@ -91,6 +91,7 @@ struct editorConfig E;
 
 /** filetypes **/
 char *C_HL_extensions[] = { ".c", ".h", ".cpp", NULL};
+
 char *C_HL_keywords[] = {
     "switch", "if", "while", "for", "break", "continue", "return", "else",
     "struct", "union", "typedef", "static", "enum", "class", "case",
@@ -98,7 +99,7 @@ char *C_HL_keywords[] = {
     "void|", NULL
 };
 
-struct editorSyntax HLDB[] {
+struct editorSyntax HLDB[] = {
     {
         "c",
         C_HL_extensions,
@@ -658,7 +659,7 @@ void editorFindCallback(char *query, int key){
             saved_hl_line = current;
             saved_hl = malloc(row->rsize);
             memcpy(saved_hl, row->hl, row->rsize);
-            memset(&row->hl[math - row->render], HL_MATCH, strlen(query));
+            memset(&row->hl[match - row->render], HL_MATCH, strlen(query));
             break;
         }
     }
